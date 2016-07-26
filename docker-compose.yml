@@ -1,0 +1,17 @@
+version: '2'
+services:
+  web:
+    image: nginx:1.10.1
+    container_name: do_web
+    ports:
+      - "32023:80"
+    volumes:
+      - ./:/var/www/devops-sample-api
+      - ./nginx/do.sample-api.dev.conf:/etc/nginx/conf.d/do.sample-api.dev.conf
+    links:
+      - php
+  php:
+    image: php:7-fpm
+    container_name: do_php
+    volumes:
+      - ./:/var/www/devops-sample-api
